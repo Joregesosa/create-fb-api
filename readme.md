@@ -21,11 +21,11 @@ Replace `my-funbase-api` with the name of your project.
 After creating your project, navigate to the project directory and start the development server:
 
 ```bash
-cd my-facebook-api
+cd my-funbase-api
 npm run dev
 ```
 
-This will start the development server and you can begin working on your Facebook API.
+This will start the development server and you can begin working on your project
 
 ## Contributing
 
