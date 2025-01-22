@@ -12,7 +12,7 @@ const __dirname = path.dirname(__filename);
 
 const git = simpleGit();
 
-const repoUrl = "https://github.com/jorgesosa-funval/fb-api-template.git"; // Reemplaza con la URL de tu repositorio
+const repoUrl = "https://github.com/Joregesosa/funbase-api-template.git"; // Reemplaza con la URL de tu repositorio
 const cloneDir = path.join(process.cwd(), "template-repo");
 
 try {
