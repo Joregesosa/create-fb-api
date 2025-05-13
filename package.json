@@ -1,15 +1,16 @@
 {
   "name": "create-fb-api",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
-  "description": "A simple API environment for easy creation of APIs it works with fm-api",
+  "description": "A simple API environment for easy creation of APIs it works with fb-modules.",
   "bin": {
     "create-fb-api": "./setup.js"
   },
   "keywords": [
     "npm",
     "template",
-    "create"
+    "create", 
+    "fb-modules"
   ],
   "author": {
     "name": "joregesosa",
@@ -17,6 +18,6 @@
   },
   "license": "MIT",
   "dependencies": {
-    "simple-git": "^3.27.0"
+    "degit": "^2.8.4"
   }
 }

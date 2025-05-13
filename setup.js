@@ -1,35 +1,37 @@
 #!/usr/bin/env node
 
-import { simpleGit } from "simple-git";
+import degit from "degit";
 import fs from "fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
 import { execSync } from "child_process";
+
 const projectName = process.argv[2];
+
+if (!projectName) {
+  console.error("❌ Debes proporcionar un nombre para el proyecto.");
+  process.exit(1);
+}
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const projectPath = path.join(process.cwd(), projectName);
 
-const git = simpleGit();
-
-const repoUrl = "https://github.com/Joregesosa/funbase-api-template.git"; // Reemplaza con la URL de tu repositorio
-const cloneDir = path.join(process.cwd(), "template-repo");
+const emitter = degit("Joregesosa/funbase-api-template", {
+  cache: false,
+  force: true,
+  verbose: true,
+});
 
 try {
-  await git.clone(repoUrl, cloneDir);
-  await fs.rename(cloneDir, path.join(process.cwd(), projectName));
-  console.log(`Project ${projectName} created successfully.`);
+  console.log("📦 Creando proyecto desde plantilla...");
+  await emitter.clone(projectPath);
+
+  console.log("📥 Instalando dependencias...");
+  execSync("npm install", { stdio: "inherit", cwd: projectPath });
+
+  console.log(`✅ Proyecto "${projectName}" creado correctamente.`);
 } catch (error) {
-  console.error("Error cloning repository:", error);
+  console.error("❌ Error:", error.message || error);
+  process.exit(1);
 }
-
-// remove .git folder from project
-console.log("Eliminando archivos innecesarios...");
-fs.rm(path.join(process.cwd(), projectName, ".git"), { recursive: true });
-
-// instalar dependencias del proyecto
-console.log("Instalando dependencias...");
-execSync("npm install", {
-  stdio: "inherit",
-  cwd: path.join(process.cwd(), projectName),
-});
